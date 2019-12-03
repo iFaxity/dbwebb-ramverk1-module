@@ -2,6 +2,13 @@ Revision history
 =================================
 
 
+
+v1.0.1 (2019-12-03)
+---------------------------------
+* Fixed installation instructions in README
+
+
+
 v1.0.0 (2019-12-03)
 ---------------------------------
 * Initial commit
