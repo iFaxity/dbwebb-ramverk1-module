@@ -37,7 +37,7 @@ class ControllerTestCase extends TestCase
         $controller = new $controllerClass();
         $controller->setDI($di);
 
-        if (method_exists($this->controller, "initialize")) {
+        if (method_exists($controller, "initialize")) {
             $controller->initialize();
         }
 
