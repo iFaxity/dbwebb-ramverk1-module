@@ -3,6 +3,13 @@ Revision history
 
 
 
+v1.0.2 (2019-12-04)
+---------------------------------
+* Fixed controller tests not calling initialize
+* Fixed type hints in IP module
+
+
+
 v1.0.1 (2019-12-03)
 ---------------------------------
 * Fixed installation instructions in README
