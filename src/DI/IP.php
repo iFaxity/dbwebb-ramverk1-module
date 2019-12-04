@@ -50,7 +50,7 @@ class IP implements ContainerInjectableInterface
      * Locates an ip address
      * @param string|null $ip IP address to locate
      *
-     * @return object|null
+     * @return array|null
      */
     public function locate(?string $ip) : ?array
     {
@@ -109,7 +109,7 @@ class IP implements ContainerInjectableInterface
             $data->country = $res->country_name ?? null;
 
             if (isset($res->latitude, $res->longitude)) {
-                $data->location = (object)[
+                $data->location = (object) [
                     "latitude" => $res->latitude,
                     "longitude" => $res->longitude,
                 ];
