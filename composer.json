@@ -8,8 +8,7 @@
         "psr-4": {
             "Faxity\\": "src/",
             "Test\\": "test/"
-        },
-        "files": [ "src/functions.php" ]
+        }
     },
     "require": {
         "php": "^7.2",

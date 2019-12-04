@@ -8,8 +8,8 @@ namespace Anax\View;
 ?>
 
 <?php foreach ($messages as $message) : ?>
-    <div class="message <?= esc($message->type) ?>">
-        <div class="content"><?= esc($message->text) ?></div>
+    <div class="message <?= e($message->type) ?>">
+        <div class="content"><?= e($message->text) ?></div>
     </div>
 <?php endforeach; ?>
 

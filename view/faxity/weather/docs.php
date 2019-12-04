@@ -1,8 +1,17 @@
+<?php
+
+namespace Anax\View;
+
+/**
+ * View for "docs" route of Weather controller
+ */
+?>
+
 <h2>Väder API Documentation</h2>
 
 <h3>Testa APIet</h3>
 
-<form method="post" action="<?= esc($apiUrl) ?>">
+<form method="post" action="<?= e($apiUrl) ?>">
     <div class="textfield">
         <input id="location" name="location" placeholder=" " autocomplete="off"/>
         <label for="location">Position</label>
@@ -19,7 +28,7 @@
 
 <h3>Om APIet</h3>
 <p>För att använda dig av valideringsverktygets API använd URLen:</p>
-<p>POST <?= esc($apiUrl ) ?></p>
+<p>POST <?= e($apiUrl ) ?></p>
 <p>
     I POST bodyn ska där finnas en "location" parameter som kan vara antingen en som en sträng "latitud, longitud" eller en IP-address.
     Där finns en optionell parameter "past-month" som kan användas för att visa föregånde 30 dagarnas väderprognoser.
@@ -28,10 +37,10 @@
 <p>
     Glöms "location" parametern eller är ogiltig t.ex om IP-addressen inte kan lokaliseras, så visas ett felmeddelande med statusen 400.
     Felmeddelanden skickas i formatet nedan:
-    <pre><code><?= esc($examples->err) ?></code></pre>
+    <pre><code><?= e($examples->err) ?></code></pre>
 </p>
 <p>
     En lyckad respons skickas med statusen 200 och ser ut såhär:
-    <pre><code><?= esc($examples->ok) ?></code></pre>
+    <pre><code><?= e($examples->ok) ?></code></pre>
 </p>
 

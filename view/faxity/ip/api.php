@@ -1,9 +1,18 @@
+<?php
+
+namespace Anax\View;
+
+/**
+ * View for the API of the IP controller
+ */
+?>
+
 <h2>JSON API</h2>
 <p>
     För att få ut samma information som formuläret ovan så finns ett API att använda på sidan.
     Testa IP APIet direkt via formuläret nedan.
 </p>
-<form method="post" action="<?= esc($apiUrl) ?>">
+<form method="post" action="<?= e($apiUrl) ?>">
     <div class="textfield">
         <input id="ip2" name="ip" value="<?= $ip ?>" placeholder=" " autocomplete="off"/>
         <label for="ip2">IP-address</label>
@@ -15,24 +24,24 @@
 
 <h3>Test addresser</h3>
 <p>Testa APIet direkt via testen nedan, klicka på en knapp för att testa med förbestämda IP addresser.</p>
-<form method="post" action="<?= esc($apiUrl) ?>">
+<form method="post" action="<?= e($apiUrl) ?>">
     <?php foreach ($addrs as $idx => $addr) : ?>
-        <button type="submit" name="ip" value="<?= esc($addr) ?>">Test <?= $idx + 1 ?></button>
+        <button type="submit" name="ip" value="<?= e($addr) ?>">Test <?= $idx + 1 ?></button>
     <?php endforeach; ?>
 </form>
 
 
 <h3>Om APIet</h3>
 <p>För att använda dig av valideringsverktygets API använd:</p>
-<p>POST <?= esc($apiUrl) ?></p>
+<p>POST <?= e($apiUrl) ?></p>
 <p>
     I POST bodyn så ska där finnas med en "ip" parameter med IP-addressen som skall verifieras.
     Om parametern glöms eller är tom så skickas en respons med statusen 400 och kan se ut såhär:
-    <pre><code><?= esc($examples->err) ?></code></pre>
+    <pre><code><?= e($examples->err) ?></code></pre>
 </p>
 <p>
     Annars skickas en respons med statusen 200 och kan se ut såhär:
-    <pre><code><?= esc($examples->ok) ?></code></pre>
+    <pre><code><?= e($examples->ok) ?></code></pre>
 </p>
 <ul>
     <li>

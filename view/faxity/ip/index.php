@@ -1,3 +1,12 @@
+<?php
+
+namespace Anax\View;
+
+/**
+ * View for "index" route of IP controller
+ */
+?>
+
 <h1>IP validerare</h1>
 
 <?php if (!is_null($valid)) : ?>
@@ -26,7 +35,7 @@
 
 <form method="GET" action="">
     <div class="textfield">
-        <input id="ip1" name="ip" value="<?= esc($ip) ?>" placeholder=" " autocomplete="off"/>
+        <input id="ip1" name="ip" value="<?= e($ip) ?>" placeholder=" " autocomplete="off"/>
         <label for="ip1">IP-address</label>
     </div>
 
