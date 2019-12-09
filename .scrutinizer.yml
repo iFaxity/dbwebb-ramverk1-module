@@ -12,10 +12,10 @@ build:
       tests:
         override:
           - php-scrutinizer-run
-
-  tests:
-    override:
-      - command: make phpunit
-        coverage:
-          file: build/coverage.clover
-          format: php-clover
+    phpunit:
+      tests:
+        override:
+          - command: make phpunit
+            coverage:
+              file: build/coverage.clover
+              format: php-clover
