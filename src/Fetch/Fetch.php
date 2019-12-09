@@ -65,7 +65,7 @@ class Fetch
 
         // Create handles for cURL request
         $handles = array_map(function ($item) use ($multi) {
-            $handle = self::initRequest($item["url"], $item["params"]);
+            $handle = self::initRequest($item["url"], $item["params"] ?? null);
             curl_multi_add_handle($multi, $handle);
 
             return $handle;
