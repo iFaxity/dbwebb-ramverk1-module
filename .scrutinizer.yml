@@ -1,0 +1,15 @@
+filter:
+  excluded_paths:
+    - vendor/*
+    - test/*
+
+build:
+  environment:
+    php: 7.4
+
+  tests:
+    override:
+      - command: make phpunit
+        coverage:
+          file: build/coverage.clover
+          format: php-clover
