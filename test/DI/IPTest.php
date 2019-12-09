@@ -70,7 +70,6 @@ class IPTest extends DITestCase
             "ip" => "194.47.129.122",
             "valid" => true,
             "type" => "ipv4",
-            "domain" => null,
             "region_name" => "Blekinge",
             "country_name" => "Sweden",
             "latitude" => 56.16122055053711,
@@ -83,7 +82,7 @@ class IPTest extends DITestCase
         $this->assertEquals("194.47.150.9", $data->ip);
         $this->assertTrue($data->valid);
         $this->assertEquals("ipv4", $data->type);
-        $this->assertNull($data->domain);
+        $this->assertEquals($data->domain, "dbwebb.se");
         $this->assertIsString($data->region);
         $this->assertIsString($data->country);
         $this->assertIsObject($data->location);
@@ -99,7 +98,6 @@ class IPTest extends DITestCase
             "ip" => "2001:db8::1",
             "valid" => true,
             "type" => "ipv6",
-            "domain" => null,
             "region_name" => null,
             "country_name" => null,
             "latitude" => null,
