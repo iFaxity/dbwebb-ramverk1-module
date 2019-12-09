@@ -2,6 +2,24 @@ Revision history
 =================================
 
 
+
+v1.0.4 (2019-12-10)
+---------------------------------
+* Added initial CI configs
+* Removed sudo key from Travis config
+* Updated Ci configs to use php 7.3 instead of 7.4
+* Fixed error in Fetch
+* Fixed error in IPTest
+* Fixed test errors caused by gethostbyaddr
+* Added message to assert, to debug easier
+* Fixed error in APIControllerTest
+* Fixed error in Weather DI service
+* Enabled code analysis on Scrutinizer CI
+* Fixed phpunit in Scrutinizer CI
+* Added CI badges to README
+
+
+
 v1.0.3 (2019-12-04)
 ---------------------------------
 * Replaced functions.php with view helpers
