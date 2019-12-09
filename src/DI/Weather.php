@@ -66,7 +66,7 @@ class Weather implements ContainerInjectableInterface
 
         return (object) [
             "date"    => $date->format("d M, Y"),
-            "summary" => $data->summary,
+            "summary" => $data->summary ?? "",
             "icon"    => $data->icon,
             "minTemp" => $this->formatTemp($data->temperatureMin),
             "maxTemp" => $this->formatTemp($data->temperatureMax),
