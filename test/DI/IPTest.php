@@ -82,7 +82,7 @@ class IPTest extends DITestCase
         $this->assertEquals("194.47.150.9", $data->ip);
         $this->assertTrue($data->valid);
         $this->assertEquals("ipv4", $data->type);
-        $this->assertEquals($data->domain, "dbwebb.se");
+        $this->assertStringStartsWith("dbwebb.", $data->domain);
         $this->assertIsString($data->region);
         $this->assertIsString($data->country);
         $this->assertIsObject($data->location);
