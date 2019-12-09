@@ -10,8 +10,6 @@ matrix:
     - php: nightly
     - php: hhvm
 
-sudo: false
-
 git:
   submodules: false
 
