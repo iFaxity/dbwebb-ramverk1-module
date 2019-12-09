@@ -23,7 +23,7 @@ class APIControllerTest extends ControllerTestCase
         $this->assertIsArray($res);
 
         list($body, $status) = $res;
-        $this->assertEquals($status, 200, $res["message"] ?? "");
+        $this->assertEquals($status, 200, $body["message"] ?? "");
         $this->assertIsArray($body);
 
         $this->assertIsArray($body["coords"]);
