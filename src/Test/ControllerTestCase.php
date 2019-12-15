@@ -1,27 +1,24 @@
 <?php
 
-namespace Test;
+namespace Faxity\Test;
 
 use Anax\DI\DIMagic;
 use PHPUnit\Framework\TestCase;
-use Anax\Commons\ContainerInjectableInterface;
 
 /**
  * Just a wrapper so we dont need to add same code in all
  * of the controllers test classes
  */
-abstract class DITestCase extends TestCase
+class ControllerTestCase extends TestCase
 {
     /**
-     * @var $service DI service
+     * @var $controller Anax Controller class
      * @var $di Dependency injector
+     * @var $className Controller class name
      */
-    protected $service;
+    protected $controller;
     protected $di;
-
-
-    abstract protected function createService() : ContainerInjectableInterface;
-
+    protected $className;
 
     /**
      * Setup for every test case
@@ -31,16 +28,22 @@ abstract class DITestCase extends TestCase
     {
         global $di;
 
-        // Create dependency injector with the service
+        // Create dependency injector with the controller
         $di = new DIMagic();
         $di->loadServices(ANAX_INSTALL_PATH . "/config/di");
         $di->loadServices(ANAX_INSTALL_PATH . "/test/config/di");
 
-        $this->di = $di;
-        $this->service = $this->createService();
-        $this->service->setDI($di);
-    }
+        $controllerClass = $this->className;
+        $controller = new $controllerClass();
+        $controller->setDI($di);
 
+        if (method_exists($controller, "initialize")) {
+            $controller->initialize();
+        }
+
+        $this->di = $di;
+        $this->controller = $controller;
+    }
 
     /**
      * Teardown for every test case
@@ -51,7 +54,7 @@ abstract class DITestCase extends TestCase
         global $di;
 
         $di = null;
-        $this->service = null;
+        $this->controller = null;
         $this->di = null;
     }
 }

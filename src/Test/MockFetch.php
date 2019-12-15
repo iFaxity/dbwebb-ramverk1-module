@@ -1,6 +1,6 @@
 <?php
 
-namespace Test;
+namespace Faxity\Test;
 
 use Faxity\Fetch\Fetch;
 

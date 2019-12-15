@@ -6,8 +6,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Faxity\\": "src/",
-            "Test\\": "test/"
+            "Faxity\\": "src/"
         }
     },
     "require": {

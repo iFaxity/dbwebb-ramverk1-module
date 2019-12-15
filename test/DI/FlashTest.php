@@ -3,7 +3,7 @@
 namespace Faxity\DI;
 
 use Anax\Commons\ContainerInjectableInterface;
-use Test\DITestCase;
+use Faxity\Test\DITestCase;
 
 /**
  * Test the Flash DI Service.

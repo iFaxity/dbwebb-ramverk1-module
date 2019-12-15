@@ -7,3 +7,6 @@ services:
           - ./src:/home/anax/repo/src
           - ./test:/home/anax/repo/test
           - ./view:/home/anax/repo/view
+        dns:
+          - 8.8.8.8
+          - 8.8.4.4

@@ -2,7 +2,7 @@
 
 namespace Faxity\Weather;
 
-use Test\ControllerTestCase;
+use Faxity\Test\ControllerTestCase;
 
 /**
  * Test Weather Controller.

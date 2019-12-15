@@ -3,8 +3,8 @@
 namespace Faxity\DI;
 
 use Anax\Commons\ContainerInjectableInterface;
-use Test\DITestCase;
-use Test\MockFetch;
+use Faxity\Test\DITestCase;
+use Faxity\Test\MockFetch;
 
 /**
  * Test the Weather DI Service.

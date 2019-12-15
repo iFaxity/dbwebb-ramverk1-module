@@ -2,7 +2,7 @@
 
 namespace Faxity\IP;
 
-use Test\ControllerTestCase;
+use Faxity\Test\ControllerTestCase;
 
 /**
  * Test the IPv6 Controller.
