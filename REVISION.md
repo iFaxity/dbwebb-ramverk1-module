@@ -3,6 +3,12 @@ Revision history
 
 
 
+v1.0.5 (2019-12-16)
+---------------------------------
+* Moved custom test cases to folder in src
+
+
+
 v1.0.4 (2019-12-10)
 ---------------------------------
 * Added initial CI configs
