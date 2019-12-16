@@ -3,6 +3,12 @@ Revision history
 
 
 
+v1.0.6 (2019-12-16)
+---------------------------------
+* Updated custom test cases
+
+
+
 v1.0.5 (2019-12-16)
 ---------------------------------
 * Moved custom test cases to folder in src
