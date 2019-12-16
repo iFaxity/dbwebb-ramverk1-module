@@ -2,7 +2,6 @@
 
 namespace Faxity\DI;
 
-use Anax\Commons\ContainerInjectableInterface;
 use Faxity\Test\DITestCase;
 use Faxity\Test\MockFetch;
 
@@ -11,22 +10,40 @@ use Faxity\Test\MockFetch;
  */
 class IPTest extends DITestCase
 {
-    /**
-     * @var MockFetch $fetch Fetch client to mock responses
-     */
+    /** @var MockFetch $fetch Fetch client to mock responses */
     private $fetch;
 
+    /** @var IP $ip IP service */
+    private $ip;
+
 
     /**
-     * Creates the DI service
+     * Setup for each test case
+     *
+     * @return void
      */
-    public function createService() : ContainerInjectableInterface
+    public function setUp(): void
     {
+        parent::setUp();
+
         $cfg = $this->di->configuration->load("ip");
         $apiKey = $cfg["config"]["apiKey"];
-        $this->fetch = new MockFetch();
 
-        return new IP($apiKey, $this->fetch);
+        $this->fetch = new MockFetch();
+        $this->ip = new IP($apiKey, $this->fetch);
+        $this->ip->setDI($this->di);
+    }
+
+
+    /**
+     * Teardown for each test case
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        $this->ip = null;
     }
 
 
@@ -41,7 +58,7 @@ class IPTest extends DITestCase
         ];
 
         $this->fetch->addResponse($res);
-        $coords = $this->service->locate("194.47.150.9");
+        $coords = $this->ip->locate("194.47.150.9");
 
         $this->assertIsArray($coords);
         $this->assertCount(2, $coords);
@@ -55,7 +72,7 @@ class IPTest extends DITestCase
      */
     public function testLocateFail()
     {
-        $coords = $this->service->locate("someip");
+        $coords = $this->ip->locate("someip");
 
         $this->assertNull($coords);
     }
@@ -77,7 +94,7 @@ class IPTest extends DITestCase
         ];
 
         $this->fetch->addResponse($res);
-        $data = $this->service->validate("194.47.150.9");
+        $data = $this->ip->validate("194.47.150.9");
 
         $this->assertEquals("194.47.150.9", $data->ip);
         $this->assertTrue($data->valid);
@@ -105,7 +122,7 @@ class IPTest extends DITestCase
         ];
 
         $this->fetch->addResponse($res);
-        $data = $this->service->validate("2001:db8::1");
+        $data = $this->ip->validate("2001:db8::1");
 
         $this->assertEquals("2001:db8::1", $data->ip);
         $this->assertTrue($data->valid);
@@ -123,7 +140,7 @@ class IPTest extends DITestCase
      */
     public function testValidateFail()
     {
-        $data = $this->service->validate("");
+        $data = $this->ip->validate("");
 
         $this->assertNull($data);
     }
@@ -135,7 +152,7 @@ class IPTest extends DITestCase
     public function testGetAddress()
     {
         $_SERVER["REMOTE_ADDR"] = "10.20.30.40";
-        $addr = $this->service->getAddress();
+        $addr = $this->ip->getAddress();
 
         $this->assertEquals($addr, "10.20.30.40");
     }

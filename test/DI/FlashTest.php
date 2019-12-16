@@ -2,7 +2,6 @@
 
 namespace Faxity\DI;
 
-use Anax\Commons\ContainerInjectableInterface;
 use Faxity\Test\DITestCase;
 
 /**
@@ -11,11 +10,33 @@ use Faxity\Test\DITestCase;
 class FlashTest extends DITestCase
 {
     /**
-     * Creates the DI service
+     * @var Flash $flash
      */
-    public function createService() : ContainerInjectableInterface
+    private $flash;
+
+
+    /**
+     * Setup for each test case
+     *
+     * @return void
+     */
+    public function setUp(): void
     {
-        return new Flash("faxity/flash/default", "flash");
+        parent::setUp();
+        $this->flash = new Flash("faxity/flash/default", "flash");
+        $this->flash->setDI($this->di);
+    }
+
+
+    /**
+     * Teardown for each test case
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        $this->flash = null;
     }
 
 
@@ -24,11 +45,11 @@ class FlashTest extends DITestCase
      */
     public function testAddMessage() : void
     {
-        $this->service->ok("Success message");
-        $this->service->warn("Warning message");
-        $this->service->err("Error message");
+        $this->flash->ok("Success message");
+        $this->flash->warn("Warning message");
+        $this->flash->err("Error message");
 
-        $messages = $this->service->getMessages();
+        $messages = $this->flash->getMessages();
         $this->assertIsArray($messages);
         $this->assertCount(3, $messages);
 
@@ -51,7 +72,7 @@ class FlashTest extends DITestCase
         $this->assertFalse($this->di->view->hasContent("flash"));
 
         // Check if render adds region to view
-        $this->service->render();
+        $this->flash->render();
 
         $this->assertTrue($this->di->view->hasContent("flash"));
     }

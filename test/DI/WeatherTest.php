@@ -2,7 +2,6 @@
 
 namespace Faxity\DI;
 
-use Anax\Commons\ContainerInjectableInterface;
 use Faxity\Test\DITestCase;
 use Faxity\Test\MockFetch;
 
@@ -11,13 +10,20 @@ use Faxity\Test\MockFetch;
  */
 class WeatherTest extends DITestCase
 {
-    /**
-     * @var MochFetch $fetch Mock fetch client
-     */
+    /** @var MochFetch $fetch Mock fetch client */
     private $fetch;
 
+    /** @var Weather $weather IP service */
+    private $weather;
 
-    private function generateResponse($time) : object
+
+    /**
+     * Generates a DarkSky forecast response
+     * @param int $time
+     *
+     * @return object
+     */
+    private function generateResponse(int $time) : object
     {
         return (object) [
             "timezone" => "Europe/Stockholm",
@@ -37,15 +43,32 @@ class WeatherTest extends DITestCase
 
 
     /**
-     * Creates the DI service
+     * Setup for each test case
+     *
+     * @return void
      */
-    public function createService() : ContainerInjectableInterface
+    public function setUp(): void
     {
+        parent::setUp();
+
         $cfg = $this->di->configuration->load("weather");
         $apiKey = $cfg["config"]["apiKey"];
-        $this->fetch = new MockFetch();
 
-        return new Weather($apiKey, $this->fetch);
+        $this->fetch = new MockFetch();
+        $this->weather = new Weather($apiKey, $this->fetch);
+        $this->weather->setDI($this->di);
+    }
+
+
+    /**
+     * Teardown for each test case
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        $this->weather = null;
     }
 
 
@@ -54,7 +77,7 @@ class WeatherTest extends DITestCase
         $res = $this->generateResponse(time());
 
         $this->fetch->addResponse($res);
-        $body = $this->service->forecast("-45.691, -32.14");
+        $body = $this->weather->forecast("-45.691, -32.14");
 
         $this->assertIsObject($body);
         $this->assertIsArray($body->coords);
@@ -77,7 +100,7 @@ class WeatherTest extends DITestCase
         ];
 
         $this->fetch->addResponse($res);
-        $this->service->forecast("4.67, -87.673");
+        $this->weather->forecast("4.67, -87.673");
     }
 
 
@@ -89,7 +112,7 @@ class WeatherTest extends DITestCase
         }, range(1, 30));
 
         $this->fetch->addResponse($res);
-        $body = $this->service->forecast("5.91, -25.6", true);
+        $body = $this->weather->forecast("5.91, -25.6", true);
 
         $this->assertIsObject($body);
         $this->assertIsArray($body->coords);
